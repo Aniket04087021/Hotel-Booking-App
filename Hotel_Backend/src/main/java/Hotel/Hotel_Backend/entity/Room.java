@@ -4,18 +4,22 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class Room {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String roomNumber;
     private String type;
     private double price;
     private boolean isAvailable;
 
     // Getters and Setters
+
     public Long getId() {
         return id;
     }
@@ -48,6 +52,7 @@ public class Room {
         this.price = price;
     }
 
+    @JsonProperty("isAvailable")
     public boolean isAvailable() {
         return isAvailable;
     }
