@@ -1,0 +1,55 @@
+<div class="card mb-4">
+  <div class="card-header">{{ isEditing ? 'Edit Room' : 'Add Room' }}</div>
+  <div class="card-body">
+    <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+    <form>
+      <div class="mb-3">
+        <label for="roomNumber" class="form-label">Room Number</label>
+        <input type="text" class="form-control" id="roomNumber" [(ngModel)]="selectedRoom.roomNumber" name="roomNumber" required>
+      </div>
+      <div class="mb-3">
+        <label for="type" class="form-label">Type</label>
+        <input type="text" class="form-control" id="type" [(ngModel)]="selectedRoom.type" name="type" required>
+      </div>
+      <div class="mb-3">
+        <label for="price" class="form-label">Price</label>
+        <input type="number" class="form-control" id="price" [(ngModel)]="selectedRoom.price" name="price" required>
+      </div>
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="isAvailable" [(ngModel)]="selectedRoom.isAvailable" name="isAvailable">
+        <label class="form-check-label" for="isAvailable">Available</label>
+      </div>
+      <button type="button" class="btn btn-primary" (click)="saveRoom()">Save</button>
+      <button type="button" class="btn btn-secondary" (click)="resetForm()">Cancel</button>
+    </form>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">Room List</div>
+  <div class="card-body">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Room Number</th>
+          <th>Type</th>
+          <th>Price</th>
+          <th>Available</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let room of rooms">
+          <td>{{ room.roomNumber }}</td>
+          <td>{{ room.type }}</td>
+          <td>{{ room.price }}</td>
+          <td>{{ room.isAvailable ? 'Yes' : 'No' }}</td>
+          <td>
+            <button class="btn btn-sm btn-warning me-2" (click)="selectRoom(room)">Edit</button>
+            <button class="btn btn-sm btn-danger" (click)="deleteRoom(room.id!)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
